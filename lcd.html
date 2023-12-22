@@ -13,13 +13,51 @@
         <h1>Display LCD</h1>
 
     <h3>Descrição: </h3>
-    <p></p>                                    
+    <p>Display OLED SSd1306 <br> <br>
+	https://peppe8o.com/ssd1306-i2c-oled-raspberry-pi-pico-micropython/</p>                                    
 
-    <h3>Pino:</h3>
+    <h3>Pino: SCK, DAS, VCC, GND </h3>
 
     <h3>Datasheet: </h3>
 
 <h3>Exemplo de código: </h3>
+<p>Escreve "ola mundo" no display LCD</p>
+<pre>
+<code>
+from machine import Pin, I2C
+from ssd1306 import SSD1306_I2C
+import time
+
+# Configuração do I2C para o display OLED
+i2c = I2C(0, scl=Pin(15), sda=Pin(14))
+oled = SSD1306_I2C(128, 64, i2c)
+
+# Função para limpar o display
+def clear_display():
+    oled.fill(0)
+    oled.show()
+
+# Função para escrever no display
+def display_text(text):
+    oled.text(text, 0, 0)
+    oled.show()
+
+# Limpar o display inicialmente
+clear_display()
+
+# Texto a ser exibido
+mensagem = "Olá, mundo!"
+
+# Exibir a mensagem no display
+display_text(mensagem)
+
+# Aguardar por alguns segundos
+time.sleep(5)
+
+# Limpar o display novamente
+clear_display()
+</code>
+</pre>
 
 </body>
 </html>

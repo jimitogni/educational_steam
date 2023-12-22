@@ -6,12 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            background-color: yellow;
-        }
     </style>
 </head>
 <body>
     <h1>Buzzer B</h1>
+
+    <h3>Descrição: </h3>
+    <p>Buzzer passivo Ky-006</p>                                    
+
+    <h3>Pino:</h3>
+
+    <h3>Datasheet: </h3>
+
+<h3>Exemplo de código: </h3>
+<p>Toca uma melodia simples</p>
+<pre>
+<code>
+from machine import Pin, PWM
+import time
+
+# Pino GPIO conectado ao buzzer
+buzzer_pin = Pin(21)
+
+# Inicializa o objeto PWM no pino do buzzer
+buzzer_pwm = PWM(buzzer_pin)
+
+# Frequência da nota musical (em Hz)
+NOTA_C4 = 261.63
+NOTA_D4 = 293.66
+NOTA_E4 = 329.63
+NOTA_F4 = 349.23
+NOTA_G4 = 392.00
+NOTA_A4 = 440.00
+NOTA_B4 = 493.88
+
+# Função para tocar uma nota por um determinado período de tempo
+def tocar_nota(frequencia, duracao):
+    buzzer_pwm.freq(int(frequencia))
+    time.sleep(duracao)
+    buzzer_pwm.duty_u16(0)  # Desliga o buzzer
+
+# Melodia simples
+melodia = [
+    (NOTA_C4, 0.5),
+    (NOTA_D4, 0.5),
+    (NOTA_E4, 0.5),
+    (NOTA_F4, 0.5),
+    (NOTA_G4, 0.5),
+    (NOTA_A4, 0.5),
+    (NOTA_B4, 0.5),
+]
+
+# Tocar a melodia
+for nota, duracao in melodia:
+    tocar_nota(nota, duracao)
+    time.sleep(0.1)  # Aguarda um curto período entre as notas
+
+# Encerra o PWM
+buzzer_pwm.deinit()
+</code>
+</pre>
+
 </body>
 </html>

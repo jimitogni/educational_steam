@@ -13,13 +13,61 @@
     <h1>Matriz LEDs 5x5</h1>
 
     <h3>Descrição: </h3>
-    <p>Matriz (5x5) de LEDs RGB endereçável</p>
+    <p>Matriz (5x5) de LEDs RGB endereçável <br> Display de LEDs Neopixel 5x5 <br>
+Ws2812 led 5050 rgb 5x5 5*5 25 led matriz para arduino</p>
 
     <h3>Pino:</h3>
 
     <h3>Datasheet: </h3>
 
 <h3>Exemplo de código: </h3>
+<p>Exemplo de código em MicroPython para acender uma matriz de LEDs 5x5 formando um coração na BitDogLab:</p>
+<pre>
+<code>
+from machine import Pin
+import neopixel
+import time
+
+# Número de LEDs na sua matriz 5x5
+NUM_LEDS = 25
+
+# Inicializar a matriz de NeoPixels no GPIO7
+np = neopixel.NeoPixel(Pin(7), NUM_LEDS)
+
+# Definindo a matriz de LEDs para formar um coração
+coracao = [
+    [0, 1, 0, 1, 0],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 1, 1, 1, 0],
+    [0, 0, 1, 0, 0],
+]
+
+# Função para acender a matriz de LEDs com base no padrão do coração
+def acender_coracao():
+    for i in range(5):
+        for j in range(5):
+            index = i * 5 + j
+            if coracao[i][j] == 1:
+                np[index] = (255, 0, 0)  # Vermelho para formar o coração
+            else:
+                np[index] = (0, 0, 0)  # Desliga o LED
+
+    np.write()
+
+# Acender o coração por alguns segundos
+acender_coracao()
+time.sleep(5)
+
+# Desligar todos os LEDs
+for i in range(NUM_LEDS):
+    np[i] = (0, 0, 0)
+
+np.write()
+
+</code>
+</pre>
+
 
 
 </body>
