@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>IDE BitDogLab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script defer src="https://pyscript.net/releases/2022.12.1/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2022.12.1/pyscript.css">
+
+    <style>
+    .main-content {
+  width: 1440px;
+  margin: auto;
+  font-size: 14px;
+}
+
+.connect-container {
+  margin: 20px 0;
+}
+
+.container {
+  display: flex;
+}
+
+.sender, .receiver {
+  flex: 1;
+}
+
+.sender {
+  margin-right: 8px;
+}
+
+.receiver {
+  margin-left: 8px;
+}
+
+.lines-header {
+  height: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #444;
+  line-height: 30px;
+  color: white;
+  padding-left: 10px;
+}
+
+.lines-body {
+  width: 100%;
+  background-color: #222;
+  min-height: 300px;
+  padding: 10px 0 20px 0;
+}
+
+.line, .command-line {
+  box-sizing: border-box;
+  width: 100%;
+  color: #f1f1f1;
+  background-color: #222;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.line:hover {
+   background-color: #444;
+}
+
+.button::before {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-box-shadow: #959595 0 2px 5px;
+    -moz-box-shadow: #959595 0 2px 5px;
+    border-radius: 3px;
+    box-shadow: #959595 0 2px 5px;
+    content: "";
+    display: block;
+    left: 0;
+    padding: 2px 0 0;
+    position: absolute;
+    top: 0;
+}
+
+.button:active::before { padding: 1px 0 0; }
+
+.button.black {
+    background: #656565;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#656565), to(#444));
+    background: -moz-linear-gradient(#656565, #444);
+    background: linear-gradient(#656565, #444);
+    border: solid 1px #535353;
+    border-bottom: solid 3px #414141;
+    box-shadow: inset 0 0 0 1px #939393;
+    color: #fff;
+    text-shadow: 0 1px 0 #2f2f2f;
+    padding: 8px 16px;
+    outline: none;
+}
+
+.button.black:hover {
+    background: #4c4c4c;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#4c4c4c), to(#565656));
+    background: -moz-linear-gradient(#4c4c4c, #565656);
+    background: linear-gradient(#4c4c4c, #565656);
+    border: solid 1px #464646;
+    border-bottom: solid 3px #414141;
+    box-shadow: inset 0 0 0 1px #818181;
+}
+
+.button.black:active {
+    background: #474747;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#474747), to(#444));
+    background: -moz-linear-gradient(#474747, #444);
+    background: linear-gradient(#474747, #444);
+    border: solid 1px #2f2f2f;
+    box-shadow: inset 0 10px 15px 0 #3e3e3e;
+}
+        
+    </style>
+    
+    <script>
+    var serial = {};
+
+(function() {
+  'use strict';
+
+  serial.getPorts = function() {
+    return navigator.usb.getDevices().then(devices => {
+      return devices.map(device => new serial.Port(device));
+    });
+  };
+
+  serial.requestPort = function() {
+    const filters = [
+      { 'vendorId': 0xcafe }, // TinyUSB
+      { 'vendorId': 0x239a }, // Adafruit
+      { 'vendorId': 0x2e8a }, // Raspberry Pi
+      { 'vendorId': 0x303a }, // Espressif
+      { 'vendorId': 0x2341 }, // Arduino
+    ];
+    return navigator.usb.requestDevice({ 'filters': filters }).then(
+      device => new serial.Port(device)
+    );
+  }
+
+  serial.Port = function(device) {
+    this.device_ = device;
+    this.interfaceNumber = 0;
+    this.endpointIn = 0;
+    this.endpointOut = 0;
+  };
+
+  serial.Port.prototype.connect = function() {
+    let readLoop = () => {
+      this.device_.transferIn(this.endpointIn, 64).then(result => {
+        this.onReceive(result.data);
+        readLoop();
+      }, error => {
+        this.onReceiveError(error);
+      });
+    };
+
+    return this.device_.open()
+        .then(() => {
+          if (this.device_.configuration === null) {
+            return this.device_.selectConfiguration(1);
+          }
+        })
+        .then(() => {
+          var interfaces = this.device_.configuration.interfaces;
+          interfaces.forEach(element => {
+            element.alternates.forEach(elementalt => {
+              if (elementalt.interfaceClass==0xFF) {
+                this.interfaceNumber = element.interfaceNumber;
+                elementalt.endpoints.forEach(elementendpoint => {
+                  if (elementendpoint.direction == "out") {
+                    this.endpointOut = elementendpoint.endpointNumber;
+                  }
+                  if (elementendpoint.direction=="in") {
+                    this.endpointIn =elementendpoint.endpointNumber;
+                  }
+                })
+              }
+            })
+          })
+        })
+        .then(() => this.device_.claimInterface(this.interfaceNumber))
+        .then(() => this.device_.selectAlternateInterface(this.interfaceNumber, 0))
+        .then(() => this.device_.controlTransferOut({
+            'requestType': 'class',
+            'recipient': 'interface',
+            'request': 0x22,
+            'value': 0x01,
+            'index': this.interfaceNumber}))
+        .then(() => {
+          readLoop();
+        });
+  };
+
+  serial.Port.prototype.disconnect = function() {
+    return this.device_.controlTransferOut({
+            'requestType': 'class',
+            'recipient': 'interface',
+            'request': 0x22,
+            'value': 0x00,
+            'index': this.interfaceNumber})
+        .then(() => this.device_.close());
+  };
+
+  serial.Port.prototype.send = function(data) {
+    return this.device_.transferOut(this.endpointOut, data);
+  };
+})();
+
+        (function() {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', event => {
+    let connectButton = document.querySelector("#connect");
+    let statusDisplay = document.querySelector('#status');
+    let port;
+
+    function addLine(linesId, text) {
+      var senderLine = document.createElement("div");
+      senderLine.className = 'line';
+      var textnode = document.createTextNode(text);
+      senderLine.appendChild(textnode);
+      document.getElementById(linesId).appendChild(senderLine);
+      return senderLine;
+    }
+
+    let currentReceiverLine;
+
+    function appendLines(linesId, text) {
+      const lines = text.split('\r');
+      if (currentReceiverLine) {
+        currentReceiverLine.innerHTML =  currentReceiverLine.innerHTML + lines[0];
+        for (let i = 1; i < lines.length; i++) {
+          currentReceiverLine = addLine(linesId, lines[i]);
+        }
+      } else {
+        for (let i = 0; i < lines.length; i++) {
+          currentReceiverLine = addLine(linesId, lines[i]);
+        }
+      }
+    }
+
+    function connect() {
+      port.connect().then(() => {
+        statusDisplay.textContent = '';
+        connectButton.textContent = 'Disconnect';
+
+        port.onReceive = data => {
+          let textDecoder = new TextDecoder();
+          console.log(textDecoder.decode(data));
+          if (data.getInt8() === 13) {
+            currentReceiverLine = null;
+          } else {
+            appendLines('receiver_lines', textDecoder.decode(data));
+          }
+        };
+        port.onReceiveError = error => {
+          console.error(error);
+        };
+      }, error => {
+        statusDisplay.textContent = error;
+      });
+    }
+
+    connectButton.addEventListener('click', function() {
+      if (port) {
+        port.disconnect();
+        connectButton.textContent = 'Connect';
+        statusDisplay.textContent = '';
+        port = null;
+      } else {
+        serial.requestPort().then(selectedPort => {
+          port = selectedPort;
+          connect();
+        }).catch(error => {
+          statusDisplay.textContent = error;
+        });
+      }
+    });
+
+    serial.getPorts().then(ports => {
+      if (ports.length === 0) {
+        statusDisplay.textContent = 'No device found.';
+      } else {
+        statusDisplay.textContent = 'Connecting...';
+        port = ports[0];
+        connect();
+      }
+    });
+
+
+    let commandLine = document.getElementById("command_line");
+
+    commandLine.addEventListener("keypress", function(event) {
+      if (event.keyCode === 13) {
+        if (commandLine.value.length > 0) {
+          addLine('sender_lines', commandLine.value);
+          commandLine.value = '';
+        }
+      }
+
+      port.send(new TextEncoder('utf-8').encode(String.fromCharCode(event.which || event.keyCode)));
+    });
+  });
+})();
+        
+    </script>
+</head>
+<body>
+    <py-config src="./pyscript.toml"></py-config>
+    <py-script src="./main.py"></py-script>
+
+    <H3>BitDogLab - REPL</H3>
+
+    <div style="margin-right: 3rem">
+        <py-repl id="my-repl" auto-generate="true"> </py-repl>
+    </div>
+    <div class="main-content">
+      <h1>BitDogLab - Enviar comando mprempte via WebUSB Serial</h1>
+      <div class="connect-container">
+        <button id="connect" class="button black">Connect</button>
+        <span id="status"></span>
+      </div>
+      <div class="container">
+        <div class="sender">
+          <div class="lines-header">Sender</div>
+          <div class="lines-body">
+            <div id="sender_lines" class="lines"></div>
+            <input id="command_line" class="command-line" placeholder="Start typing ...." />
+          </div>
+        </div>
+        <div class="receiver">
+          <div class="lines-header">Receiver</div>
+          <div class="lines-body">
+            <div id="receiver_lines" class="lines"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html> 
