@@ -1,0 +1,71 @@
+{
+  "intents": [
+    {
+      "tag": "saldacoes",
+      "patterns": [
+        "Oi",
+        "Olá",
+        "Tudo bem com você?",
+        "Tem alguém ai?",
+        "Bom dia",
+        "Boa tarde"
+      ],
+      "responses": [
+        "Olá!",
+        "Olá, como posso ajuda-lo com a sua BitDogLab hojê?",
+        "Oi, como posso ajuda-lo com a sua BitDogLab hojê?"
+      ]
+    },
+    {
+      "tag": "despedida",
+      "patterns": ["Tchau", "Até mais", "Goodbye"],
+      "responses": [
+        "Obrigado por utilizar a BitDogLab, até mais"
+      ]
+    },
+    {
+      "tag": "agradecimento",
+      "patterns": ["Obrigado", "Muito obrigado", "Valeu", "vlw", "obg"],
+      "responses": ["Fico feliz em ajudar!", "Imagina, fico feliz em ajudar!"]
+    },
+    {
+      "tag": "sobre",
+      "patterns": [
+        "O que é a BitDogLab?",
+        "BitDogLab",
+	      "projeto BitDogLab?"
+      ],
+      "responses": [
+        "Objetivo do projeto: A BitDogLab, uma iniciativa do Projeto Escola 40 da Unicamp, é uma ferramenta educacional dedicada à eletrônica e computação. Baseada na Raspberry Pi Pico H ou W, permite aos usuários explorar, montar e programar utilizando componentes montados na sua placa e também externos conectados de forma organizada e segura. Selecionados meticulosamente, os componentes promovem um aprendizado mão na massa, incentivando os usuários a aprimorar habilidades de programação e eletrônica de maneira sinérgica e progressiva. Esta plataforma enriquecedora oferece uma experiência vibrante, imergindo os usuários em um ambiente de aprendizado colorido, auditivo e sinestésico. Além disso, a BitDogLab é otimizada para programação assistida por modelos de linguagem de grande escala (LLM), como o ChatGPT, facilitando um aprendizado mais intuitivo e assistido por um incansável tutor. O BitDogLab é uma ferramenta para ensinar jovens a programar. É um diferencial da BitDogLab é que seu projeto é totalmente aberto, permitindo que seja livremente copiada, fabricada, montada e melhorada pelos usuários"
+      ]
+    },
+    {
+      "tag": "funcional",
+      "patterns": [
+        "Para que serve a BitDogLab?",
+        "Como a BitDogLab funciona?",
+      	"Para que serve",
+      	"Como funciona?"
+      ],
+      "responses": [
+        "Funcionalidades da placa BitDogLab: As principais características da BitDogLab e as suas potenciais possibilidades são resumidas a seguir: Experiência Prática: O projeto da BitDogLab é compartilhado de forma aberta e gratuita, permitindo que os usuários montem sua própria placa, soldando componente a componente enquanto progridem na programação. Isso proporciona um aprendizado que vai além da teoria e oferece uma experiência valiosa em montagem de placas eletrônicas. Programação Intuitiva: O uso da IDE Thonny Editor, em conjunto com o MicroPython, oferece uma plataforma amigável, que permite aos iniciantes se aprofundarem na programação sem medo. Open Source Learning: Sendo o projeto integralmente código aberto, ele convida entusiastas e profissionais a explorar, utilizar, modificar e aprimorar o design original de forma contínua. A colaboração da comunidade pode expandir o escopo do projeto, possibilitando adaptações para outros microcontroladores, como os da Expressif ou STMicro. Mergulho na Inteligência Artificial: Com o suporte do IABOT, os estudantes não só têm suas dúvidas resolvidas, mas também são introduzidos ao fascinante mundo da IA, abrindo portas para futuras aprendizagens nesta área. Ferramenta agregadora para aplicar a metodologia STEAM de ensino: A BitDogLab vai além de ser apenas um projeto de uma placa de circuito impresso. Ela representa uma poderosa ferramenta educativa que converge diversas disciplinas. Através dela, os conceitos de Ciência, Tecnologia, Engenharia, Artes e Matemática (STEAM) são unificados, proporcionando uma abordagem holística ao aprendizado. Com esta integração, os estudantes podem visualizar como esses campos se entrelaçam na prática, incentivando a inovação e a criatividade. Recursos disponíveis: PCB da BitDogLab: Esta placa de circuito é a alma do projeto. Neste repositório você pode obter os arquivos de fabricação. O projeto BitDogLab está disponível gratuitamente no GitHub para quem deseja acessá-lo e contribuir. Atualmente, estamos na quarta versão de desenvolvimento, que trouxe inovações significativas: foram incorporados conectores específicos para os dois canais I2C e, além disso, agora é possível carregar a bateria da placa através de um mini painel solar, ampliando suas possibilidades de uso e sustentabilidade."
+        
+      ]
+    },
+    {
+      "tag": "código",
+      "patterns": [
+        "Como faço para acender o LED RGB",
+        "Como faço para acender o LED",
+        "Acender LED",
+        "Código simples",
+      	"Exemplo de código simples",
+      	"Exemplo de código",
+      	"Exemplo"
+      ],
+      "responses": [
+        "Um exemplo simples de código para acender LEDs na placa BitDogLab. \n from machine import Pin \n led = Pin(13, Pin.OUT) \n led.high() \n time.sleep(3) \n led.low()"
+      ]
+    }
+  ] 
+}
