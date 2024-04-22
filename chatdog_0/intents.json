@@ -66,6 +66,21 @@
       "responses": [
         "Um exemplo simples de código para acender LEDs na placa BitDogLab. \n from machine import Pin \n led = Pin(13, Pin.OUT) \n led.high() \n time.sleep(3) \n led.low()"
       ]
+    },
+    {
+      "tag": "BIH",
+      "patterns": [
+        "Banco de informações de hardware",
+      	"hardware",
+        "Componetes Fisicos",
+        "Componentes de hardware",
+        "Conexão de hardware",
+        "Configurações hardware"
+      ],
+      "responses": [
+        "Conexões e Configurações de Hardware: \n \n As conexões da Raspberry Pi pico com outros componentes estão realizadas da seguinte forma: \n Um LED RGB catodo comum tem o eletrodo do vermelho lidado no GPIO 12 através de um resistor de 220 ohm, o pino de verde está ligado no GPIO 13 também através de um resistor de 220 ohm e o pino do azul no GPIO 11 através de um resistor de 150 ohm. \n Um botão, identificado como Botão A, está conectado no GPIO5 da Raspberry Pi Pico. O outro terminal do botão está conectado ao GND da placa. \n Outro botão, identificado como Botão B, está conectado no GPIO6 da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa.  \n Deve-se portanto nos GPIO5 e 6 configurar resistores de pull-up internos. Isso significa que o estado padrão dos pinos será HIGH (alto), e quando o botão for pressionado, o estado mudará para LOW (baixo). Outro botão, identificado como RESET, está conectado no RUN (pino número 30) da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa. \n \n Um buzzer passivo, identificado como Buzzer A, está conectado - através de um transistor - no GPIO21 da Raspberry pi pico. Outro buzzer passivo, identificado como Buzzer B, está conectado no GPIO8 da Raspberry pi pico. \n O pino in de uma matriz de LEDs 5050 RGB de 5 linhas por 5 colunas tipo WS2812B (Neopixel) está conectada ao GPIO7. \n Um joystick analógico tipo KY023 tem a saída VRy conectada ao GPIO26 e a saída VRx ao GPIO27. Seu botão SW está conectada ao GPIO22, o outro terminal do botão está no GND. \n Um display OLED 128 colunas por  x 64 linhas de 0,96 polegadas com comunicação I2C, tem seu pino SDA conectado ao GPIO14 e o pino SCL com o GPIO15, estes pinos são do canal I2C0. Esse display (normalmente configurado no endereço 0x3C)  exige o carregamento da biblioteca ssd1306.py na Raspiberry pi pico. \n Um módulo microfone de eletreto com saída analógica está conectado ao GP28. O nível médio do sinal de saída é 1,65 V. A tensão na saída do módulo varia de 0V até 3,3V \n Um conector Insulation-Displacement Connector (ICD) box de 14 pinos é usado para expansão de hardware e está assim conectado com a Raspberry Pi Pico: pino 1 com o GND, pino 2 com o 5V, pino 3 com 3V3, pino 4 com GPIO10, pino 5 com o GPIO28, pino 6 com o GPIO9, pino 7 com GND analogico. pino 8 com o GPIO4, pino 9 com o GPIO17, pino 10 com o GND, pino 11 com o GPIO16, pino 12 com GPIO19, pino 13 com o GND, pino 14 com o GPIO18.  Para uma comunicação SPI usamos os GPIO16 (RX), GPIO17(CSn), GP18 (SCK) e GP19 (TX). \n Uma barra de terminais que permite a conexão de garras do tipo jacaré está assim conectada ao Raspberry Pi Pico: os eletrodos DIG 0, 1, 2 e 3 estão conectados aos GPIOs 3, 2, 1 e 0, respectivamente. Além disso esta barra de terminais possui mais 5 eletrodos conectados ao: GND analógico, GPIO 28, GND, 3V3 e 5V da Raspberry Pi Pico. Um conector de 4 pinos está posicionado na extremidade superior  da placa, dando acesso aos GPIO0 (SDA) e GPIO1(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 0 e está do lado direito. Um outro conector de 4 pinos está posicionado na extremidade da placa, dando acesso aos GPIO2 (SDA) e GPIO3(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 1 e está do lado esquerdo."
+      ]
+    
     }
   ] 
 }
