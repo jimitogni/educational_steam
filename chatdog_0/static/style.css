@@ -19,6 +19,14 @@ body {
     --primary: #DCDCDC;
 }
 
+p {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* CHATBOX
 =============== */
 
@@ -89,15 +97,29 @@ body {
     margin-bottom: 10px;
 }
 
+.code {
+    padding: 10px 5px 10px 5px;
+    background: black;
+    color: white;
+    max-width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+
 
 .messages__item {
     background: orange;
     max-width: 60.6%;
     width: fit-content;
+    color: black;
 }
 
 .messages__item--operator {
     margin-left: auto;
+    color: black;
 }
 
 .messages__item--visitor {
@@ -169,7 +191,7 @@ body {
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     background: var(--primary);
-    color: white;
+    color: black;
 }
 
 /* FOOTER */
