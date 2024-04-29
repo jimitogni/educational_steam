@@ -1,0 +1,46 @@
+<br>rom machine import Pin
+import time
+
+# Configuração dos pinos dos botões A e B
+pino_botao_a = Pin(5, Pin.IN, Pin.PULL_UP)  # GPIO5 para o Botão A com resistor de pull-up interno
+pino_botao_b = Pin(6, Pin.IN, Pin.PULL_UP)  # GPIO6 para o Botão B com resistor de pull-up interno
+
+# Configuração do pino do LED
+pino_led = Pin(3, Pin.OUT)  # GPIO3 para o LED
+
+# Variável para controlar o estado do LED
+led_aceso = False
+
+# Função para acender o LED quando o Botão A for pressionado
+def acender_led():
+    global led_aceso  # Utilizamos a variável global
+
+    estado_botao_a = pino_botao_a.value()
+
+    # Debounce simples
+    time.sleep_ms(20)
+
+    # Se o Botão A estiver pressionado (estado LOW) e o LED não estiver aceso, acende o LED
+    if not estado_botao_a and not led_aceso:
+        pino_led.value(1)
+        led_aceso = True
+
+# Função para apagar o LED quando o Botão B for pressionado
+def apagar_led():
+    global led_aceso  # Utilizamos a variável global
+
+    estado_botao_b = pino_botao_b.value()
+
+    # Debounce simples
+    time.sleep_ms(20)
+
+    # Se o Botão B estiver pressionado (estado LOW) e o LED estiver aceso, apaga o LED
+    if not estado_botao_b and led_aceso:
+        pino_led.value(0)
+        led_aceso = False
+
+# Loop principal
+while True:
+    acender_led()
+    apagar_led()
+    time.sleep(0.1)  # Adiciona um pequeno atraso para evitar leituras falsas

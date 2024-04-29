@@ -65,7 +65,7 @@
       	"Exemplo"
       ],
       "responses": [
-        "Um exemplo simples de código para acender LEDs na placa BitDogLab. </br> </br> \n <div class='code'> <code> from machine import Pin \n </br> led = Pin(13, Pin.OUT) </br> \n led.high() </br>time.sleep(3) </br> led.low()</code></br></div>" 
+        "Um exemplo simples de código para acender LEDs na placa BitDogLab. </br> </br> \n <div class='code'> <code> from machine import Pin </br> </br> led = Pin(13, Pin.OUT) </br></br> \n led.high() </br>time.sleep(3) </br> led.low()</code></br></div>" 
       ]
     },
     {
@@ -73,6 +73,8 @@
       "patterns": [
         "Como faço para utilizar o buzzer",
         "buzzer",
+        "musica",
+        "música",
         "buzzers",
         "Tocar musica",
         "Tocar música",
@@ -85,7 +87,7 @@
         "Exemplo som"
       ],
       "responses": [
-        "<h2>Exemplo de código: </h2> <div class='code'> <code> Toca uma melodia simples </br> from machine import Pin, PWM </br> </br> import time </br> </br> # Pino GPIO conectado ao buzzer </br> buzzer_pin = Pin(21) </br> # Inicializa o objeto PWM no pino do buzzer </br> buzzer_pwm = PWM(buzzer_pin) </br> # Frequência da nota musical (em Hz) </br> NOTA_C4 = 261.63 </br> NOTA_D4 = 293.66 </br> NOTA_E4 = 329.63 </br> NOTA_F4 = 349.23 </br> NOTA_G4 = 392.00 </br> NOTA_A4 = 440.00 </br>  NOTA_B4 = 493.88 </br> # Função para tocar uma nota por um determinado período de tempo </br> def tocar_nota(frequencia, duracao): </br> buzzer_pwm.freq(int(frequencia)) </br> time.sleep(duracao) </br> buzzer_pwm.duty_u16(0)  # Desliga o buzzer </br> </br> # Melodia simples </br> melodia = [ </br> (NOTA_C4, 0.5), </br> (NOTA_D4, 0.5), </br> (NOTA_E4, 0.5), </br> (NOTA_F4, 0.5), </br> (NOTA_G4, 0.5), </br> (NOTA_A4, 0.5), </br> (NOTA_B4, 0.5), </br> ] </br> </br> # Tocar a melodia </br> for nota, duracao in melodia: </br> tocar_nota(nota, duracao) </br> time.sleep(0.1)  # Aguarda um curto período entre as notas </br> </br> # Encerra o PWM </br> buzzer_pwm.deinit() </code></div> "
+        "<h2>Exemplo de código: </h2> <p>Toca uma melodia simples </p> <div class='code'> <code>from machine import Pin, PWM </br> </br> import time </br> </br> # Pino GPIO conectado ao buzzer </br> buzzer_pin = Pin(21) </br></br> # Inicializa o objeto PWM no pino do buzzer </br> buzzer_pwm = PWM(buzzer_pin) </br></br> # Frequência da nota musical (em Hz) </br>  NOTA_C4 = 261.63 </br> NOTA_D4 = 293.66 </br> NOTA_E4 = 329.63 </br> NOTA_F4 = 349.23 </br> NOTA_G4 = 392.00 </br> NOTA_A4 = 440.00 </br> NOTA_B4 = 493.88 </br></br> # Função para tocar uma nota por um determinado período de tempo </br>def tocar_nota(frequencia, duracao): </br> &#160 buzzer_pwm.freq(int(frequencia))</br> &#160 time.sleep(duracao) </br>&#160 buzzer_pwm.duty_u16(0)  # Desliga o buzzer </br> </br> # Melodia simples </br> melodia = [ </br> (NOTA_C4, 0.5), </br> (NOTA_D4, 0.5), </br> (NOTA_E4, 0.5), </br> (NOTA_F4, 0.5), </br> (NOTA_G4, 0.5), </br> (NOTA_A4, 0.5), </br> (NOTA_B4, 0.5), </br> ] </br> </br> # Tocar a melodia </br> for nota, duracao in melodia: </br> &#160 tocar_nota(nota, duracao) </br> &nbsp time.sleep(0.1)  # Aguarda um curto período entre as notas </br> </br> # Encerra o PWM </br> buzzer_pwm.deinit() </code></div> "
       ]
     },
     {
@@ -101,7 +103,24 @@
       "responses": [
         "<h3>Conexões e Configurações de Hardware:</h3> <p>\n \n As conexões da Raspberry Pi pico com outros componentes estão realizadas da seguinte forma: </p> </br> </br> \n Um LED RGB catodo comum tem o eletrodo do vermelho lidado no GPIO 12 através de um resistor de 220 ohm, o pino de verde está ligado no GPIO 13 também através de um resistor de 220 ohm e o pino do azul no GPIO 11 através de um resistor de 150 ohm. \n <p>Um botão, identificado como Botão A, está conectado no GPIO5 da Raspberry Pi Pico.</p> <p> O outro terminal do botão está conectado ao GND da placa. \n Outro botão, identificado como Botão B, está conectado no GPIO6 da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa.  \n Deve-se portanto nos GPIO5 e 6 configurar resistores de pull-up internos. Isso significa que o estado padrão dos pinos será HIGH (alto), e quando o botão for pressionado, o estado mudará para LOW (baixo). Outro botão, identificado como RESET, está conectado no RUN (pino número 30) da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa.  </br> \n \n Um buzzer passivo, identificado como Buzzer A, está conectado - através de um transistor - no GPIO21 da Raspberry pi pico. Outro buzzer passivo, identificado como Buzzer B, está conectado no GPIO8 da Raspberry pi pico. \n  </br> O pino in de uma matriz de LEDs 5050 RGB de 5 linhas por 5 colunas tipo WS2812B (Neopixel) está conectada ao GPIO7. \n Um joystick analógico tipo KY023 tem a saída VRy conectada ao GPIO26 e a saída VRx ao GPIO27. Seu botão SW está conectada ao GPIO22, o outro terminal do botão está no GND. </br> \n Um display OLED 128 colunas por  x 64 linhas de 0,96 polegadas com comunicação I2C, tem seu pino SDA conectado ao GPIO14 e o pino SCL com o GPIO15, estes pinos são do canal I2C0. Esse display (normalmente configurado no endereço 0x3C)  exige o carregamento da biblioteca ssd1306.py na Raspiberry pi pico. \n </br> Um módulo microfone de eletreto com saída analógica está conectado ao GP28. O nível médio do sinal de saída é 1,65 V. A tensão na saída do módulo varia de 0V até 3,3V </p> <p> Um conector Insulation-Displacement Connector (ICD) box de 14 pinos é usado para expansão de hardware e está assim conectado com a Raspberry Pi Pico: pino 1 com o GND, pino 2 com o 5V, pino 3 com 3V3, pino 4 com GPIO10, pino 5 com o GPIO28, pino 6 com o GPIO9, pino 7 com GND analogico. pino 8 com o GPIO4, pino 9 com o GPIO17, pino 10 com o GND, pino 11 com o GPIO16, pino 12 com GPIO19, pino 13 com o GND, pino 14 com o GPIO18.  </p> <p> Para uma comunicação SPI usamos os GPIO16 (RX), GPIO17(CSn), GP18 (SCK) e GP19 (TX). \n </br> Uma barra de terminais que permite a conexão de garras do tipo jacaré está assim conectada ao Raspberry Pi Pico: os eletrodos DIG 0, 1, 2 e 3 estão conectados aos GPIOs 3, 2, 1 e 0, respectivamente. </p> <p>Além disso esta barra de terminais possui mais 5 eletrodos conectados ao: GND analógico, GPIO 28, GND, 3V3 e 5V da Raspberry Pi Pico.</p> <p> Um conector de 4 pinos está posicionado na extremidade superior  da placa, dando acesso aos GPIO0 (SDA) e GPIO1(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 0 e está do lado direito.</p> <p> Um outro conector de 4 pinos está posicionado na extremidade da placa, dando acesso aos GPIO2 (SDA) e GPIO3(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 1 e está do lado esquerdo.</p>"
       ]
-    
+     },
+    {
+      "tag": "botoes",
+      "patterns": [
+        "apertar botão A",
+      	"apertar botão B",
+        "botões",
+        "acender leb usando botão",
+        "fazer ao apertar botão",
+        "ao apertar o botão",
+        "pressionar botão",
+        "pressionar botões",
+        "botão A",
+        "botão B",
+      ],
+      "responses": [
+        " <h3> Programa para acender o LED RGB usando o botão A (acender) e o Botão B (apagar) </h3> </br> <div class='code'> <code> from machine import Pin </br> import time </br></br> # Configuração dos pinos dos botões A e B </br> pino_botao_a = Pin(5, Pin.IN, Pin.PULL_UP) </br> # GPIO5 para o Botão A com resistor de pull-up interno <br> pino_botao_b = Pin(6, Pin.IN, Pin.PULL_UP)<br> # GPIO6 para o Botão B com resistor de pull-up interno<br><br><br># Configuração do pino do LED<br>pino_led = Pin(13, Pin.OUT)  # GPIO3 para o LED <br><br> #Variável para controlar o estado do LED <br> led_aceso = False <br><br># Função para acender o LED quando o Botão A for pressionado <br> def acender_led(): <br> &#160 global led_aceso <br> # Utilizamos a ariável global <br><br> &#160 estado_botao_a = pino_botao_a.value() <br><br> &#160 # Debounce simples <br> &#160 time.sleep_ms(20 <br><br> &#160 #Se o Botão A estiver pressionado (estado LOW) e o LED não estiver aceso, acende o LED<br>&#160 if not estado_botao_a and not led_aceso:<br> &#160 &#160 pino_led.value(1)<br> &#160 &#160 led_aceso = True<br><br> #Função para apagar o LED quando o Botão B for pressionado <br> def apagar_led():<br> &#160 global led_aceso <br> #Utilizamos a variável global<br> <br>  &#160 estado_botao_b =  pino_botao_b.value() <br><br> &#160 #Debounce simples<br> &#160 time.sleep_ms(20) <br> <br> &#160 #Se o Botão B estiver pressionado  (estado LOW) e o LED estiver aceso, apaga o LED <br> &#160 if not estado_botao_b and led_aceso:<br> &#160 &#160 pino_led.value(0)<br> &#160 &#160  led_aceso = False <br><br> # Loop principal<br> while True:<br> &#160 acender_led() <br> &#160 apagar_led()<br> &#160 time.sleep(0.1) # diciona um pequeno atraso para evitar leituras falsas </code></div>"
+      ]
     }
   ] 
 }
