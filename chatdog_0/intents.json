@@ -37,7 +37,7 @@
 	    "projeto BitDogLab?"
       ],
       "responses": [
-        "<h3> Objetivo do projeto: </h3> <p> A BitDogLab, uma iniciativa do Projeto Escola 40 da Unicamp, é uma ferramenta educacional dedicada à eletrônica e computação.</p> <p>Baseada na Raspberry Pi Pico H ou W, permite aos usuários explorar, montar e programar utilizando componentes montados na sua placa e também externos conectados de forma organizada e segura.</p> <p> Selecionados meticulosamente, os componentes promovem um aprendizado mão na massa, incentivando os usuários a aprimorar habilidades de programação e eletrônica de maneira sinérgica e progressiva. </p> <p> Esta plataforma enriquecedora oferece uma experiência vibrante, imergindo os usuários em um ambiente de aprendizado colorido, auditivo e sinestésico. </p> <p>Além disso, a BitDogLab é otimizada para programação assistida por modelos de linguagem de grande escala (LLM), como o ChatGPT, facilitando um aprendizado mais intuitivo e assistido por um incansável tutor.</p> <p> O BitDogLab é uma ferramenta para ensinar jovens a programar.</p> <p> É um diferencial da BitDogLab é que seu projeto é totalmente aberto, permitindo que seja livremente copiada, fabricada, montada e melhorada pelos usuários</p>"
+        "<h3> Objetivo do projeto: </h3> <p> A BitDogLab, uma iniciativa do Projeto Escola 4.0 da Unicamp, é uma ferramenta educacional dedicada à eletrônica e computação.</p> <p>Baseada na Raspberry Pi Pico H ou W, permite aos usuários explorar, montar e programar utilizando componentes montados na sua placa e também externos conectados de forma organizada e segura.</p> <p> Selecionados meticulosamente, os componentes promovem um aprendizado mão na massa, incentivando os usuários a aprimorar habilidades de programação e eletrônica de maneira sinérgica e progressiva. </p> <p> Esta plataforma enriquecedora oferece uma experiência vibrante, imergindo os usuários em um ambiente de aprendizado colorido, auditivo e sinestésico. </p> <p>Além disso, a BitDogLab é otimizada para programação assistida por modelos de linguagem de grande escala (LLM), como o ChatGPT, facilitando um aprendizado mais intuitivo e assistido por um incansável tutor.</p> <p> O BitDogLab é uma ferramenta para ensinar jovens a programar.</p> <p> É um diferencial da BitDogLab é que seu projeto é totalmente aberto, permitindo que seja livremente copiada, fabricada, montada e melhorada pelos usuários</p>"
       ]
     },
     {
@@ -98,7 +98,8 @@
         "Componetes Fisicos",
         "Componentes de hardware",
         "Conexão de hardware",
-        "Configurações hardware"
+        "Configurações hardware",
+          "Configurações"
       ],
       "responses": [
         "<h3>Conexões e Configurações de Hardware:</h3> <p>\n \n As conexões da Raspberry Pi pico com outros componentes estão realizadas da seguinte forma: </p> </br> </br> \n Um LED RGB catodo comum tem o eletrodo do vermelho lidado no GPIO 12 através de um resistor de 220 ohm, o pino de verde está ligado no GPIO 13 também através de um resistor de 220 ohm e o pino do azul no GPIO 11 através de um resistor de 150 ohm. \n <p>Um botão, identificado como Botão A, está conectado no GPIO5 da Raspberry Pi Pico.</p> <p> O outro terminal do botão está conectado ao GND da placa. \n Outro botão, identificado como Botão B, está conectado no GPIO6 da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa.  \n Deve-se portanto nos GPIO5 e 6 configurar resistores de pull-up internos. Isso significa que o estado padrão dos pinos será HIGH (alto), e quando o botão for pressionado, o estado mudará para LOW (baixo). Outro botão, identificado como RESET, está conectado no RUN (pino número 30) da Raspberry pi pico. O outro terminal do botão também está conectado ao GND da placa.  </br> \n \n Um buzzer passivo, identificado como Buzzer A, está conectado - através de um transistor - no GPIO21 da Raspberry pi pico. Outro buzzer passivo, identificado como Buzzer B, está conectado no GPIO8 da Raspberry pi pico. \n  </br> O pino in de uma matriz de LEDs 5050 RGB de 5 linhas por 5 colunas tipo WS2812B (Neopixel) está conectada ao GPIO7. \n Um joystick analógico tipo KY023 tem a saída VRy conectada ao GPIO26 e a saída VRx ao GPIO27. Seu botão SW está conectada ao GPIO22, o outro terminal do botão está no GND. </br> \n Um display OLED 128 colunas por  x 64 linhas de 0,96 polegadas com comunicação I2C, tem seu pino SDA conectado ao GPIO14 e o pino SCL com o GPIO15, estes pinos são do canal I2C0. Esse display (normalmente configurado no endereço 0x3C)  exige o carregamento da biblioteca ssd1306.py na Raspiberry pi pico. \n </br> Um módulo microfone de eletreto com saída analógica está conectado ao GP28. O nível médio do sinal de saída é 1,65 V. A tensão na saída do módulo varia de 0V até 3,3V </p> <p> Um conector Insulation-Displacement Connector (ICD) box de 14 pinos é usado para expansão de hardware e está assim conectado com a Raspberry Pi Pico: pino 1 com o GND, pino 2 com o 5V, pino 3 com 3V3, pino 4 com GPIO10, pino 5 com o GPIO28, pino 6 com o GPIO9, pino 7 com GND analogico. pino 8 com o GPIO4, pino 9 com o GPIO17, pino 10 com o GND, pino 11 com o GPIO16, pino 12 com GPIO19, pino 13 com o GND, pino 14 com o GPIO18.  </p> <p> Para uma comunicação SPI usamos os GPIO16 (RX), GPIO17(CSn), GP18 (SCK) e GP19 (TX). \n </br> Uma barra de terminais que permite a conexão de garras do tipo jacaré está assim conectada ao Raspberry Pi Pico: os eletrodos DIG 0, 1, 2 e 3 estão conectados aos GPIOs 3, 2, 1 e 0, respectivamente. </p> <p>Além disso esta barra de terminais possui mais 5 eletrodos conectados ao: GND analógico, GPIO 28, GND, 3V3 e 5V da Raspberry Pi Pico.</p> <p> Um conector de 4 pinos está posicionado na extremidade superior  da placa, dando acesso aos GPIO0 (SDA) e GPIO1(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 0 e está do lado direito.</p> <p> Um outro conector de 4 pinos está posicionado na extremidade da placa, dando acesso aos GPIO2 (SDA) e GPIO3(SCL) além do 3V3 e GND. Este conector é nomeado de I2C 1 e está do lado esquerdo.</p>"
@@ -116,10 +117,43 @@
         "pressionar botão",
         "pressionar botões",
         "botão A",
-        "botão B",
+        "botão B"
       ],
       "responses": [
-        " <h3> Programa para acender o LED RGB usando o botão A (acender) e o Botão B (apagar) </h3> </br> <div class='code'> <code> from machine import Pin </br> import time </br></br> # Configuração dos pinos dos botões A e B </br> pino_botao_a = Pin(5, Pin.IN, Pin.PULL_UP) </br> # GPIO5 para o Botão A com resistor de pull-up interno <br> pino_botao_b = Pin(6, Pin.IN, Pin.PULL_UP)<br> # GPIO6 para o Botão B com resistor de pull-up interno<br><br><br># Configuração do pino do LED<br>pino_led = Pin(13, Pin.OUT)  # GPIO3 para o LED <br><br> #Variável para controlar o estado do LED <br> led_aceso = False <br><br># Função para acender o LED quando o Botão A for pressionado <br> def acender_led(): <br> &#160 global led_aceso <br> # Utilizamos a ariável global <br><br> &#160 estado_botao_a = pino_botao_a.value() <br><br> &#160 # Debounce simples <br> &#160 time.sleep_ms(20 <br><br> &#160 #Se o Botão A estiver pressionado (estado LOW) e o LED não estiver aceso, acende o LED<br>&#160 if not estado_botao_a and not led_aceso:<br> &#160 &#160 pino_led.value(1)<br> &#160 &#160 led_aceso = True<br><br> #Função para apagar o LED quando o Botão B for pressionado <br> def apagar_led():<br> &#160 global led_aceso <br> #Utilizamos a variável global<br> <br>  &#160 estado_botao_b =  pino_botao_b.value() <br><br> &#160 #Debounce simples<br> &#160 time.sleep_ms(20) <br> <br> &#160 #Se o Botão B estiver pressionado  (estado LOW) e o LED estiver aceso, apaga o LED <br> &#160 if not estado_botao_b and led_aceso:<br> &#160 &#160 pino_led.value(0)<br> &#160 &#160  led_aceso = False <br><br> # Loop principal<br> while True:<br> &#160 acender_led() <br> &#160 apagar_led()<br> &#160 time.sleep(0.1) # diciona um pequeno atraso para evitar leituras falsas </code> </div>"
+        "<h3> Programa para acender o LED RGB usando o botão A (acender) e o Botão B (apagar) </h3> </br> <div class='code'> <code> from machine import Pin </br> import time </br></br> # Configuração dos pinos dos botões A e B </br> pino_botao_a = Pin(5, Pin.IN, Pin.PULL_UP) </br> # GPIO5 para o Botão A com resistor de pull-up interno <br> pino_botao_b = Pin(6, Pin.IN, Pin.PULL_UP)<br> # GPIO6 para o Botão B com resistor de pull-up interno<br><br><br># Configuração do pino do LED<br>pino_led = Pin(13, Pin.OUT)  # GPIO3 para o LED <br><br> #Variável para controlar o estado do LED <br> led_aceso = False <br><br># Função para acender o LED quando o Botão A for pressionado <br> def acender_led(): <br> &#160 global led_aceso <br> # Utilizamos a ariável global <br><br> &#160 estado_botao_a = pino_botao_a.value() <br><br> &#160 # Debounce simples <br> &#160 time.sleep_ms(20 <br><br> &#160 #Se o Botão A estiver pressionado (estado LOW) e o LED não estiver aceso, acende o LED<br>&#160 if not estado_botao_a and not led_aceso:<br> &#160 &#160 pino_led.value(1)<br> &#160 &#160 led_aceso = True<br><br> #Função para apagar o LED quando o Botão B for pressionado <br> def apagar_led():<br> &#160 global led_aceso <br> #Utilizamos a variável global<br> <br>  &#160 estado_botao_b =  pino_botao_b.value() <br><br> &#160 #Debounce simples<br> &#160 time.sleep_ms(20) <br> <br> &#160 #Se o Botão B estiver pressionado  (estado LOW) e o LED estiver aceso, apaga o LED <br> &#160 if not estado_botao_b and led_aceso:<br> &#160 &#160 pino_led.value(0)<br> &#160 &#160  led_aceso = False <br><br> # Loop principal<br> while True:<br> &#160 acender_led() <br> &#160 apagar_led()<br> &#160 time.sleep(0.1) # diciona um pequeno atraso para evitar leituras falsas </code> </div>"
+      ]
+    },
+    {
+      "tag": "coração",
+      "patterns": [
+        "coração",
+      	"coração vermelho",
+        "botões",
+        "coracao",
+        "coração leds",
+        "coração leds matriz led",
+        "coração leds matriz leds",
+        "coracao leds",
+        "coracao leds matriz leds"
+      ],
+      "responses": [
+        "<h3> Programa para acender/desenhar um coração com a matriz de LEDs </h3> </br>        <div class='code'> <code> from machine import Pin</br> import neopixel</br>import time</br></br></br># Número de LEDs na sua matriz 5x5</br>NUM_LEDS = 25</br></br># Inicializar a matriz de NeoPixels no GPIO7</br>np = neopixel.NeoPixel(Pin(7), NUM_LEDS)</br></br># Definindo a matriz de LEDs para formar um coração</br>coracao = [ </br>    [0, 0, 1, 0, 0], </br>     [0, 1, 1, 1, 0],</br>    [1, 1, 1, 1, 1],</br>    [1, 1, 1, 1, 1],</br>    [0, 1, 0, 1, 0],</br> </br>]</br># Função para acender a matriz de LEDs com base no padrão do coração</br>def acender_coracao():</br>&#160 for i in range(5):</br>&#160 &#160 for j in range(5):</br>&#160 &#160 &#160 index = i * 5 + j</br>&#160 &#160 &#160 if coracao[i][j] == 1:</br>&#160 &#160 &#160 &#160 np[index] = (20, 0, 0)  # Vermelho para formar o coração</br>&#160 &#160 &#160 else:</br>&#160 &#160 &#160 &#160 np[index] = (0, 0, 0)  # Desliga o LED</br></br>&#160 np.write()</br></br># Acender o coração por alguns segundos</br>acender_coracao()</br>time.sleep(5)</br></br> # Desligar todos os LEDs</br> for i in range(NUM_LEDS):</br> &#160 np[i] = (0, 0, 0)</br></br>np.write() </code> </div>"
+      ]
+    },
+    {
+      "tag": "joystick e oled",
+      "patterns": [
+        "joystick",
+      	"display OLED",
+        "OLED",
+        "display",
+        "tela",
+        "tela oled",
+        "atualizar o display",
+        "coracao leds",
+        "coracao leds matriz leds"
+      ],
+      "responses": [ "<h3> Atualizar o display OLED com as posições x e y atraveś do joystick</h3> </br> <div class='code'> <code> </br> from machine import Pin, I2C </br> import ssd1306 </br>  </br> # Inicializa o display OLED </br> i2c = I2C(0, sda=Pin(0), scl=Pin(1)) </br> display = ssd1306.SSD1306_I2C(128, 64, i2c) </br>  </br> # Variáveis para as posições x e y </br> x = 2 </br> y = 2 </br>  </br> # Função para atualizar o display OLED com as posições </br> def atualizar_display(): </br> &#160 display.fill(0)  # Limpa o display </br> &#160 display.text('x: {}'.format(x), 0, 0)  # Exibe a posição x </br> &#160 display.text('y: {}'.format(y), 0, 10)  # Exibe a posição y </br> &#160 display.show()  # Atualiza o display </br>  </br> # Exemplo de uso </br> while True: </br> &#160 # Atualiza as posições x e y conforme o joystick ou outros comandos </br> &#160 # ... </br>  </br> &#160 # Chama a função para atualizar o display OLED </br> &#160 atualizar_display() </br>  </br> &#160 # Aguarda um pouco antes da próxima atualização </br> &#160 time.sleep(0.2) </code> </div>" 
       ]
     }
   ] 
